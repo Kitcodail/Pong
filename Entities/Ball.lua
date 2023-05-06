@@ -2,32 +2,49 @@ Ball = {}
 
 
 function Ball:load()
-    self.width = 20
-    self.height = 20
+   self.width = 20
+   self.height = 20
 
-    self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
-    self.y = (love.graphics.getHeight() * 0.5) - (self.height / 2)
+   self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
+   self.y = (love.graphics.getHeight() * 0.5) - (self.height / 2)
 
-    self.speed = 500
-    self.xVel = -self.speed
-    self.yVel = 0
+   self.speed = 500
+   self.xVel = -self.speed
+   self.yVel = 0
+   self.score = 0
 end
 
 
 function Ball:update(dt)
-    self:move(dt)
-    self:collide()
+   self:collide()
+   local result = self:move(dt)
+   if result == 1 then
+      self.score = self.score - 1
+   elseif result == 2 then
+      self.score = self.score + 1
+   end
+   print(self.score)
 end
 
 
 function Ball:draw()
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
 
 function Ball:move(dt)
-    self.x = self.x + self.xVel * dt
-    self.y = self.y + self.yVel * dt
+   self.x = self.x + self.xVel * dt
+   self.y = self.y + self.yVel * dt
+
+   if self.x < 0 then
+      self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
+      self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
+      return 1
+   elseif self.x > love.graphics.getWidth() + self.width then
+      self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
+      self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
+      return 2
+   end
 end
  
 
