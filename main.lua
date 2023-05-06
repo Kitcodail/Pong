@@ -1,8 +1,9 @@
 require('Entities/Player')
+require('Entities/Ball')
 
 
 function love.load()
-    entities = {Player}
+    entities = {Player, Ball}
 
     for i = 1, #entities do
         entities[i]:load()
