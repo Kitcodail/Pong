@@ -40,6 +40,14 @@ function Ball:collide()
       self.yVel = collisionPosition * 8 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
    end
 
+   if checkCollision(self, OpponentBot) then -- Checks if the ball (self) and Player rectangles are intersecting.
+      self.xVel = -self.speed --sets the balls X-velocity to the speed variable (200), meaning it will now travel towards the right.
+      local middleBall = self.y + self.height / 2 --Stores the middle point of the ball in a local variable.
+      local middleOpponentBot = Player.y + Player.height / 2 --Stores the middle point of the player in a local variable
+      local collisionPosition = middleBall - middleOpponentBot --Stores the collision position (basically if the ball hit the top or bottom part of the player paddle), in a local variable.
+      self.yVel = collisionPosition * 8 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
+   end
+
    if self.y < 0 then -- Checks if the top of the ball is above the top of the screen.
       self.y = 0 -- Sets the ball back inside the screen.
       self.yVel = -self.yVel -- Flips the y-velocity
