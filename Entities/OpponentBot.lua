@@ -10,12 +10,18 @@ function OpponentBot:load()
 
     self.speed = 750
     self.yVel = 0
+    self.timer = 0
 end
 
 
 function OpponentBot:update(dt)
     self:move(dt)
-    self:moveTowardsY(Ball)
+
+    self.timer = self. timer + dt
+    if self.timer > 0.4 then
+        self:moveTowardsY(Ball)
+        self.timer = 0
+    end
 end
 
 
