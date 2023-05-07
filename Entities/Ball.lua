@@ -29,6 +29,7 @@ end
 
 function Ball:draw()
    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+   love.graphics.print(self.score, 150, 50, 0, 10, 10)
 end
 
 

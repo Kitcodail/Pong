@@ -4,6 +4,7 @@ require('Entities/OpponentBot')
 
 
 function love.load()
+    love.graphics.setDefaultFilter("nearest", "nearest")
     entities = {Player, Ball, OpponentBot}
 
     for i = 1, #entities do
