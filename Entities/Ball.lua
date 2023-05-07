@@ -46,10 +46,12 @@ function Ball:collide()
    if checkCollision(self, OpponentBot) then -- Checks if the ball (self) and Player rectangles are intersecting.
       self.xVel = -self.speed --sets the balls X-velocity to the speed variable (200), meaning it will now travel towards the right.
       local middleBall = self.y + self.height / 2 --Stores the middle point of the ball in a local variable.
-      local middleOpponentBot = Player.y + Player.height / 2 --Stores the middle point of the player in a local variable
+      local middleOpponentBot = OpponentBot.y + OpponentBot.height / 2 --Stores the middle point of the player in a local variable
       local collisionPosition = middleBall - middleOpponentBot --Stores the collision position (basically if the ball hit the top or bottom part of the player paddle), in a local variable.
       self.yVel = collisionPosition * 3 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
-   end   if self.x < 0 then
+   end
+
+   if self.x < 0 then
       self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
       self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
       return 1
