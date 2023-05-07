@@ -8,7 +8,7 @@ function OpponentBot:load()
     self.x = love.graphics.getWidth() - self.width - 50
     self.y = (love.graphics.getHeight() * 0.5) - (self.height / 2)
 
-    self.speed = 500
+    self.speed = 750
     self.yVel = 0
 end
 

@@ -8,7 +8,7 @@ function Player:load()
     self.x = 50
     self.y = (love.graphics.getHeight() * 0.5) - (self.height / 2)
 
-    self.speed = 500
+    self.speed = 750
 end
 
 
