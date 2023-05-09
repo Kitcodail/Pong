@@ -23,8 +23,11 @@ end
 
 
 function Ball:draw()
-   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-   love.graphics.print(self.score, 150, 50, 0, 10, 10)
+   local r, g, b, a = love.graphics.getColor()
+   love.graphics.setColor(0.88, 0.88, 0.78, 1.0)
+   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height, self.width)
+   love.graphics.setColor(r, g, b, a)
+   love.graphics.print(self.score, 150, 50, 0)
 end
 
 

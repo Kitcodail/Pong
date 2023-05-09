@@ -19,7 +19,10 @@ end
 
 
 function Player:draw()
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+   local r, g, b, a = love.graphics.getColor()
+   love.graphics.setColor(0.88, 0.88, 0.78, 1.0)
+   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height, 10)
+   love.graphics.setColor(r, g, b, a)
 end
 
 
