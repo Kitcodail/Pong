@@ -12,6 +12,11 @@ function Ball:load()
    self.xVel = -self.speed
    self.yVel = 0
    self.score = 0
+
+   self.sounds = {}
+   self.sounds.pad_collision = love.audio.newSource("Resources/Sounds/pad_collision.wav", "static")
+   self.sounds.wall_collision = love.audio.newSource("Resources/Sounds/wall_collision.wav", "static")
+   self.sounds.ball_escapes = love.audio.newSource("Resources/Sounds/ball_escapes.wav", "static")
 end
 
 
@@ -39,6 +44,7 @@ end
 
 function Ball:collide()
    if checkCollision(self, Player) then -- Checks if the ball (self) and Player rectangles are intersecting.
+      self.sounds.pad_collision:play()
       self.xVel = self.speed --sets the balls X-velocity to the speed variable (200), meaning it will now travel towards the right.
       local middleBall = self.y + self.height / 2 --Stores the middle point of the ball in a local variable.
       local middlePlayer = Player.y + Player.height / 2 --Stores the middle point of the player in a local variable
@@ -47,6 +53,7 @@ function Ball:collide()
    end
 
    if checkCollision(self, OpponentBot) then -- Checks if the ball (self) and Player rectangles are intersecting.
+      self.sounds.pad_collision:play()
       self.xVel = -self.speed --sets the balls X-velocity to the speed variable (200), meaning it will now travel towards the right.
       local middleBall = self.y + self.height / 2 --Stores the middle point of the ball in a local variable.
       local middleOpponentBot = OpponentBot.y + OpponentBot.height / 2 --Stores the middle point of the player in a local variable
@@ -54,20 +61,13 @@ function Ball:collide()
       self.yVel = collisionPosition * 3 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
    end
 
-   if self.x < 0 then
-      self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
-      self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
-      return 1
-   elseif self.x > love.graphics.getWidth() + self.width then
-      self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
-      self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
-      return 2
-   end
 
    if self.y < 0 then -- Checks if the top of the ball is above the top of the screen.
+      self.sounds.wall_collision:play()
       self.y = 0 -- Sets the ball back inside the screen.
       self.yVel = -self.yVel -- Flips the y-velocity
    elseif self.y + self.height > love.graphics.getHeight() then -- Checks if the bottom of the ball is below the bottom of the screen.
+      self.sounds.wall_collision:play()
       self.y = love.graphics.getHeight() - self.height -- Sets the ball back inside the screen.
       self.yVel = -self.yVel -- Flips the y-velocity.
    end
@@ -75,17 +75,29 @@ end
 
 
 function Ball:updateScore()
-   if self.x < 0 then
+
+   if self.x < 50 - self.width then
+      self.sounds.ball_escapes:play()
+      self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
+      self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
+
+
       self.score = self.score - 1
       self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
       self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
       self.xVel = self.speed
       self.yVel = 0
-   elseif self.x > love.graphics.getWidth() + self.width then
+   elseif self.x > (love.graphics.getWidth() + self.width) - 50 then
+      self.sounds.ball_escapes:play()
+      self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
+      self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
+
+
       self.score = self.score + 1
       self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
       self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
       self.xVel = -self.speed
       self.yVel = 0
+      return 2
    end
 end
