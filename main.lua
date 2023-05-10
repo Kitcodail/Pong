@@ -5,6 +5,8 @@ require('Entities/OpponentBot')
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
+    love.graphics.setBackgroundColor(0.12, 0.12, 0.22)
+    love.graphics.setNewFont(50)
     entities = {Player, Ball, OpponentBot}
 
     for i = 1, #entities do
