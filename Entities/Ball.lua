@@ -8,7 +8,7 @@ function Ball:load()
    self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
    self.y = (love.graphics.getHeight() * 0.5) - (self.height / 2)
 
-   self.speed = 1000
+   self.speed = 1250
    self.xVel = -self.speed
    self.yVel = 0
    self.score = 0
@@ -49,7 +49,7 @@ function Ball:collide()
       local middleBall = self.y + self.height / 2 --Stores the middle point of the ball in a local variable.
       local middlePlayer = Player.y + Player.height / 2 --Stores the middle point of the player in a local variable
       local collisionPosition = middleBall - middlePlayer --Stores the collision position (basically if the ball hit the top or bottom part of the player paddle), in a local variable.
-      self.yVel = collisionPosition * 3 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
+      self.yVel = collisionPosition * 8 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
    end
 
    if checkCollision(self, OpponentBot) then -- Checks if the ball (self) and Player rectangles are intersecting.
@@ -58,7 +58,7 @@ function Ball:collide()
       local middleBall = self.y + self.height / 2 --Stores the middle point of the ball in a local variable.
       local middleOpponentBot = OpponentBot.y + OpponentBot.height / 2 --Stores the middle point of the player in a local variable
       local collisionPosition = middleBall - middleOpponentBot --Stores the collision position (basically if the ball hit the top or bottom part of the player paddle), in a local variable.
-      self.yVel = collisionPosition * 3 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
+      self.yVel = collisionPosition * 8 -- Sets the Y-velocity to be equal to the collision position * 5, this changes the angle of the balls trajectory.
    end
 
 

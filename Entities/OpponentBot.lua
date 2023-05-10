@@ -8,7 +8,7 @@ function OpponentBot:load()
     self.x = love.graphics.getWidth() - self.width - 50
     self.y = (love.graphics.getHeight() * 0.5) - (self.height / 2)
 
-    self.speed = 750
+    self.speed = 1750
     self.yVel = 0
     self.timer = 0
     self.move_time = 0.2
@@ -26,7 +26,7 @@ function OpponentBot:update(dt)
         self.move_time = 0.2                                                                                                                                                                    
     end                                                                                                                                                                                         
     if checkCollision(self, Ball) then                                                                                                                                                          
-        self.move_time = 1                                                                                                                                                                      
+        self.move_time = 0.4                                                                                                                                                                      
     end                                                                                                                                                                                         
 end                                                                                                                                                                                             
                                                                                                                                                                                                 
