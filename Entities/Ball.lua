@@ -16,7 +16,8 @@ function Ball:load()
    self.sounds = {}
    self.sounds.pad_collision = love.audio.newSource("Resources/Sounds/pad_collision.wav", "static")
    self.sounds.wall_collision = love.audio.newSource("Resources/Sounds/wall_collision.wav", "static")
-   self.sounds.ball_escapes = love.audio.newSource("Resources/Sounds/ball_escapes.wav", "static")
+   self.sounds.player_score = love.audio.newSource("Resources/Sounds/player_score.wav", "static")
+   self.sounds.enemy_score = love.audio.newSource("Resources/Sounds/enemy_score.wav", "static")
 end
 
 
@@ -77,7 +78,7 @@ end
 function Ball:updateScore()
 
    if self.x < 50 - self.width then
-      self.sounds.ball_escapes:play()
+      self.sounds.enemy_score:play()
       self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
       self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
 
@@ -88,7 +89,7 @@ function Ball:updateScore()
       self.xVel = self.speed
       self.yVel = 0
    elseif self.x > (love.graphics.getWidth() + self.width) - 50 then
-      self.sounds.ball_escapes:play()
+      self.sounds.player_score:play()
       self.x = love.graphics.getWidth() * 0.5 - self.width * 0.5
       self.y = love.graphics.getHeight() * 0.5 - self.height * 0.5
 
